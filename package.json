@@ -10,7 +10,6 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  "homepage": "https://erinithma.github.io/test/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
     "bootstrap": "^5.3.3",

@@ -29,7 +29,7 @@ export const Step1 = () => {
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<IForm> = () => {
-    nav("/2");
+    nav("/test/2");
   };
 
   const handleBlur = () => {

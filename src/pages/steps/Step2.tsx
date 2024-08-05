@@ -32,7 +32,7 @@ export const Step2 = () => {
   const nav = useNavigate();
 
   const onSubmit: SubmitHandler<IForm> = () => {
-    nav("/3");
+    nav("/test/3");
   };
 
   const getPlaces = async () => {
@@ -107,7 +107,7 @@ export const Step2 = () => {
       </FormGroup>
 
       <div className="d-flex justify-content-between">
-        <Button type="button" onClick={() => nav("/")}>
+        <Button type="button" onClick={() => nav("/test/")}>
           Назад
         </Button>
         <Button type="submit">Далее</Button>

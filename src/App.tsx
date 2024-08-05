@@ -7,15 +7,15 @@ import { store } from "./redux/store";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/test/",
     element: <Step1 />,
   },
   {
-    path: "2",
+    path: "/test/2",
     element: <Step2 />,
   },
   {
-    path: "3",
+    path: "/test/3",
     element: <Step3 />,
   },
   {
