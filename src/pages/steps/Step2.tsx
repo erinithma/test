@@ -1,13 +1,13 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
 import style from "../../App.module.scss";
-import { ERROR_REQUIRED, URL_JOBS } from "../../common/const";
+import { ERROR_REQUIRED } from "../../common/const";
 import { useNavigate } from "react-router";
-import { useEffect, useMemo, useState } from "react";
-import { Request } from "../../common/request";
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, selectState } from "../../redux/store";
-import { set } from "../../redux/slices";
+import { fetchPlaces, set } from "../../redux/slices";
+import { getPlaces, getState } from "../../redux/selectors";
+import { store } from "../../redux/store";
 
 interface IForm extends Record<string, string> {
   job: string;
@@ -15,8 +15,8 @@ interface IForm extends Record<string, string> {
 }
 
 export const Step2 = () => {
-  const initial = useSelector((state: RootState) => selectState(state));
-  const [places, setPlaces] = useState<string[]>([]);
+  const initial = useSelector(getState);
+  const places = useSelector(getPlaces);
 
   const {
     handleSubmit,
@@ -35,15 +35,11 @@ export const Step2 = () => {
     nav("/test/3");
   };
 
-  const getPlaces = async () => {
-    setPlaces(await Request.get(URL_JOBS));
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getPlaces();
+    store.dispatch(fetchPlaces());
   }, []);
-
-  const dispatch = useDispatch();
 
   const handleBlur = () => {
     dispatch(set(getValues()));

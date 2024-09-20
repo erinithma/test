@@ -5,9 +5,8 @@ export const store = configureStore({
   reducer: {
     reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-export const selectState = (state: RootState) => state.reducer.value;

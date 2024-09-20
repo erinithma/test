@@ -1,8 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { Request } from "../common/request";
+import { URL_JOBS } from "../common/const";
 
 export interface State {
   value: Record<string, string>;
+  places: string[];
+  success: boolean;
 }
 const initialState: State = {
   value: {
@@ -10,7 +14,23 @@ const initialState: State = {
     count: "200",
     period: "10",
   },
+  places: [],
+  success: true,
 };
+
+export const fetchPlaces = createAsyncThunk("api/fetchPlaces", async () => {
+  try {
+    return {
+      places: await Request.get(URL_JOBS),
+      success: true,
+    };
+  } catch {
+    return {
+      places: [],
+      success: false,
+    };
+  }
+});
 
 const slice = createSlice({
   name: "state",
@@ -19,6 +39,12 @@ const slice = createSlice({
     set: (state, action: PayloadAction<Record<string, string>>) => {
       state.value = { ...state.value, ...action.payload };
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchPlaces.fulfilled, (state, action) => {
+      state.places = action.payload.places;
+      state.success = action.payload.success;
+    });
   },
 });
 

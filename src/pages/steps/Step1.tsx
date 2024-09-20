@@ -5,7 +5,7 @@ import { ERROR_INVALID_FORMAT, ERROR_REQUIRED } from "../../common/const";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "../../redux/slices";
-import { RootState, selectState } from "../../redux/store";
+import { getState } from "../../redux/selectors";
 
 interface IForm extends Record<string, string> {
   phone: string;
@@ -15,7 +15,7 @@ interface IForm extends Record<string, string> {
 }
 
 export const Step1 = () => {
-  const initial = useSelector((state: RootState) => selectState(state));
+  const initial = useSelector(getState);
 
   const {
     handleSubmit,
