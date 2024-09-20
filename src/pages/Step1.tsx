@@ -1,11 +1,11 @@
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Button, FormGroup } from "reactstrap";
 import style from "../App.module.scss";
-import { ERROR_INVALID_FORMAT, ERROR_REQUIRED } from "../common/const";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "../redux/slices";
 import { getState } from "../redux/selectors";
+import { Input } from "../shared/input";
 
 interface IForm extends Record<string, string> {
   phone: string;
@@ -41,109 +41,53 @@ export const Step1 = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.mainForm}>
       <FormGroup>
-        <Label htmlFor="phone">Телефон</Label>
-        <Controller
-          rules={{
-            required: { value: true, message: ERROR_REQUIRED },
-            pattern: {
-              value: /\d{3}\s\d{3}\s\d{3}/,
-              message: ERROR_INVALID_FORMAT,
-            },
-          }}
+        <Input
           control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              type="tel"
-              placeholder="0999 999 999"
-              id="phone"
-              onChange={onChange}
-              onBlur={() => {
-                handleBlur(), onBlur();
-              }}
-              value={value}
-              invalid={!!errors.phone}
-            />
-          )}
+          required
+          pattern={/\d{3}\s\d{3}\s\d{3}/}
+          type="tel"
+          placeholder="0999 999 999"
+          title="Телефон"
+          error={errors.phone}
           name="phone"
+          handleBlur={handleBlur}
         />
-        {errors.phone && <FormFeedback>{errors.phone.message}</FormFeedback>}
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="name">Имя</Label>
-        <Controller
+        <Input
           control={control}
-          rules={{
-            required: { value: true, message: ERROR_REQUIRED },
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              id="name"
-              onChange={onChange}
-              onBlur={() => {
-                handleBlur(), onBlur();
-              }}
-              value={value}
-              invalid={!!errors.name}
-            />
-          )}
+          required
+          title="Имя"
+          error={errors.name}
           name="name"
+          handleBlur={handleBlur}
         />
-        {errors.name && <FormFeedback>{errors.name.message}</FormFeedback>}
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="surname">Фамилия</Label>
-        <Controller
+        <Input
           control={control}
-          rules={{
-            required: { value: true, message: ERROR_REQUIRED },
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              id="surname"
-              onChange={onChange}
-              onBlur={() => {
-                handleBlur(), onBlur();
-              }}
-              value={value}
-              invalid={!!errors.surname}
-            />
-          )}
+          required
+          title="Фамилия"
+          error={errors.surname}
           name="surname"
+          handleBlur={handleBlur}
         />
-        {errors.surname && (
-          <FormFeedback>{errors.surname.message}</FormFeedback>
-        )}
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="gender">Пол</Label>
-        <div>
-          <Controller
-            rules={{
-              required: { value: true, message: ERROR_REQUIRED },
-            }}
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                id="gender"
-                type="select"
-                onChange={onChange}
-                onBlur={() => {
-                  handleBlur(), onBlur();
-                }}
-                value={value}
-                invalid={!!errors.gender}
-              >
-                <option value="m">Мужской</option>
-                <option value="f">Женский</option>
-              </Input>
-            )}
-            name="gender"
-          />
-        </div>
-        {errors.gender && <FormFeedback>{errors.gender.message}</FormFeedback>}
+        <Input
+          control={control}
+          type="select"
+          error={errors.gender}
+          title="Пол"
+          name="gender"
+          handleBlur={handleBlur}
+        >
+          <option value="m">Мужской</option>
+          <option value="f">Женский</option>
+        </Input>
       </FormGroup>
 
       <Button type="submit">Далее</Button>

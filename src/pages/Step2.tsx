@@ -1,13 +1,13 @@
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Button, FormGroup } from "reactstrap";
 import style from "../App.module.scss";
-import { ERROR_REQUIRED } from "../common/const";
 import { useNavigate } from "react-router";
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPlaces, set } from "../redux/slices";
 import { getPlaces, getState } from "../redux/selectors";
 import { store } from "../redux/store";
+import { Input } from "../shared/input";
 
 interface IForm extends Record<string, string> {
   job: string;
@@ -48,58 +48,31 @@ export const Step2 = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.mainForm}>
       <FormGroup>
-        <Label htmlFor="job">Место работы</Label>
-        <Controller
+        <Input
           control={control}
-          rules={{
-            required: { value: true, message: ERROR_REQUIRED },
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              id="job"
-              type="select"
-              onChange={onChange}
-              onBlur={() => {
-                handleBlur(), onBlur();
-              }}
-              value={value}
-              invalid={!!errors.job}
-            >
-              {places.map((place) => (
-                <option key={place} value={place}>
-                  {place}
-                </option>
-              ))}
-            </Input>
-          )}
+          title="Место работы"
           name="job"
-        />
-        {errors.job && <FormFeedback>{errors.job.message}</FormFeedback>}
+          type="select"
+          error={errors.job}
+          handleBlur={handleBlur}
+        >
+          {places.map((place) => (
+            <option key={place} value={place}>
+              {place}
+            </option>
+          ))}
+        </Input>
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="address">Адрес проживания</Label>
-        <Controller
+        <Input
+          title="Адрес проживания"
           control={control}
-          rules={{
-            required: { value: true, message: ERROR_REQUIRED },
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              id="address"
-              onChange={onChange}
-              onBlur={() => {
-                handleBlur(), onBlur();
-              }}
-              value={value}
-              invalid={!!errors.job}
-            />
-          )}
+          required
+          handleBlur={handleBlur}
+          error={errors.job}
           name="address"
         />
-        {errors.address && (
-          <FormFeedback>{errors.address.message}</FormFeedback>
-        )}
       </FormGroup>
 
       <div className="d-flex justify-content-between">

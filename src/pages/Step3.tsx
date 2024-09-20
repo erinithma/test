@@ -1,21 +1,20 @@
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Button,
   FormGroup,
-  Label,
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader,
 } from "reactstrap";
 import style from "../App.module.scss";
-import { ERROR_REQUIRED, URL_SEND } from "../common/const";
+import { URL_SEND } from "../common/const";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "../redux/slices";
-import InputSlider from "react-input-slider";
 import { Request } from "../common/request";
 import { getState } from "../redux/selectors";
+import { Slider } from "../shared/slider";
 
 interface IForm extends Record<string, string> {
   count: string;
@@ -52,58 +51,25 @@ export const Step3 = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={style.mainForm}>
         <FormGroup>
-          <Label htmlFor="count">Сумма займа</Label>
-          <Controller
+          <Slider
+            title="Сумма займа"
             control={control}
-            rules={{
-              required: { value: true, message: ERROR_REQUIRED },
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <>
-                <InputSlider
-                  xmax={1000}
-                  xmin={200}
-                  xstep={100}
-                  axis="x"
-                  x={Number(value)}
-                  onChange={({ x }) => {
-                    onChange(x.toString());
-                    handleBlur();
-                    onBlur();
-                  }}
-                />
-                <br />${value}
-              </>
-            )}
+            max={1000}
+            min={200}
+            step={100}
+            handleBlur={handleBlur}
             name="count"
           />
         </FormGroup>
 
         <FormGroup>
-          <Label htmlFor="period">Период займа</Label>
-          <Controller
+          <Slider
+            title="Период займа"
             control={control}
-            rules={{
-              required: { value: true, message: ERROR_REQUIRED },
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <>
-                <InputSlider
-                  xmin={10}
-                  xmax={30}
-                  xstep={1}
-                  axis="x"
-                  x={Number(value)}
-                  onChange={({ x }) => {
-                    onChange(x.toString());
-                    handleBlur();
-                    onBlur();
-                  }}
-                />
-                <br />
-                {value}
-              </>
-            )}
+            max={30}
+            min={10}
+            step={1}
+            handleBlur={handleBlur}
             name="period"
           />
         </FormGroup>
