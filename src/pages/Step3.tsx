@@ -8,14 +8,14 @@ import {
   ModalFooter,
   ModalHeader,
 } from "reactstrap";
-import style from "../../App.module.scss";
-import { ERROR_REQUIRED, URL_SEND } from "../../common/const";
+import style from "../App.module.scss";
+import { ERROR_REQUIRED, URL_SEND } from "../common/const";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { set } from "../../redux/slices";
+import { set } from "../redux/slices";
 import InputSlider from "react-input-slider";
-import { Request } from "../../common/request";
-import { getState } from "../../redux/selectors";
+import { Request } from "../common/request";
+import { getState } from "../redux/selectors";
 
 interface IForm extends Record<string, string> {
   count: string;

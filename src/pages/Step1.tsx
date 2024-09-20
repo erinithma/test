@@ -1,11 +1,11 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
-import style from "../../App.module.scss";
-import { ERROR_INVALID_FORMAT, ERROR_REQUIRED } from "../../common/const";
+import style from "../App.module.scss";
+import { ERROR_INVALID_FORMAT, ERROR_REQUIRED } from "../common/const";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { set } from "../../redux/slices";
-import { getState } from "../../redux/selectors";
+import { set } from "../redux/slices";
+import { getState } from "../redux/selectors";
 
 interface IForm extends Record<string, string> {
   phone: string;

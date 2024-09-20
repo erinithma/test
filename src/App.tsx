@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Step1, Step2, Step3 } from "./pages/steps";
+import { Step1, Step2, Step3 } from "./pages";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 

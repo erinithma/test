@@ -1,13 +1,13 @@
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
-import style from "../../App.module.scss";
-import { ERROR_REQUIRED } from "../../common/const";
+import style from "../App.module.scss";
+import { ERROR_REQUIRED } from "../common/const";
 import { useNavigate } from "react-router";
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPlaces, set } from "../../redux/slices";
-import { getPlaces, getState } from "../../redux/selectors";
-import { store } from "../../redux/store";
+import { fetchPlaces, set } from "../redux/slices";
+import { getPlaces, getState } from "../redux/selectors";
+import { store } from "../redux/store";
 
 interface IForm extends Record<string, string> {
   job: string;
