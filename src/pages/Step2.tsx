@@ -28,6 +28,7 @@ export const Step2 = () => {
   } = useForm<IForm>({
     defaultValues: useMemo(() => {
       return initial;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initial, places]),
   });
 
