@@ -1,3 +1,5 @@
+import { ERROR_HTTP_FAIL } from "./const";
+
 export class Request {
   static async run(
     url: string,
@@ -6,11 +8,13 @@ export class Request {
   ) {
     try {
       const req = await fetch(url, { method, body: JSON.stringify(params) });
+      if (req.status !== 200) {
+        throw new Error(ERROR_HTTP_FAIL);
+      }
       const res = await req.json();
       return res;
     } catch (e) {
-      console.error(e);
-      throw new Error("Ошибка запроса на сервер");
+      throw new Error(ERROR_HTTP_FAIL);
     }
   }
 

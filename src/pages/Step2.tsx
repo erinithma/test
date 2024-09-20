@@ -1,13 +1,14 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, FormGroup } from "reactstrap";
+import { Alert, Button, FormGroup } from "reactstrap";
 import style from "../App.module.scss";
 import { useNavigate } from "react-router";
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPlaces, set } from "../redux/slices";
-import { getPlaces, getState } from "../redux/selectors";
+import { getApiState, getPlaces, getState } from "../redux/selectors";
 import { store } from "../redux/store";
 import { Input } from "../shared/input";
+import { ERROR_HTTP_FAIL } from "../common/const";
 
 interface IForm extends Record<string, string> {
   job: string;
@@ -17,6 +18,7 @@ interface IForm extends Record<string, string> {
 export const Step2 = () => {
   const initial = useSelector(getState);
   const places = useSelector(getPlaces);
+  const apiState = useSelector(getApiState);
 
   const {
     handleSubmit,
@@ -47,6 +49,8 @@ export const Step2 = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.mainForm}>
+      {!apiState ? <Alert color="danger">{ERROR_HTTP_FAIL}</Alert> : null}
+
       <FormGroup>
         <Input
           control={control}
@@ -70,7 +74,7 @@ export const Step2 = () => {
           control={control}
           required
           handleBlur={handleBlur}
-          error={errors.job}
+          error={errors.address}
           name="address"
         />
       </FormGroup>

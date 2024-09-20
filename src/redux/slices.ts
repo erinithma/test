@@ -20,8 +20,9 @@ const initialState: State = {
 
 export const fetchPlaces = createAsyncThunk("api/fetchPlaces", async () => {
   try {
+    const places = await Request.get(URL_JOBS);
     return {
-      places: await Request.get(URL_JOBS),
+      places,
       success: true,
     };
   } catch {
@@ -44,6 +45,10 @@ const slice = createSlice({
     builder.addCase(fetchPlaces.fulfilled, (state, action) => {
       state.places = action.payload.places;
       state.success = action.payload.success;
+    });
+    builder.addCase(fetchPlaces.rejected, (state) => {
+      state.places = [];
+      state.success = false;
     });
   },
 });
