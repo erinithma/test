@@ -8,7 +8,7 @@ import { fetchPlaces, set } from "../redux/slices";
 import { getApiState, getPlaces, getState } from "../redux/selectors";
 import { store } from "../redux/store";
 import { Input } from "../shared/input";
-import { ERROR_HTTP_FAIL } from "../common/const";
+import { Error, Page } from "../common/const";
 
 interface IForm extends Record<string, string> {
   job: string;
@@ -34,7 +34,7 @@ export const Step2 = () => {
   const nav = useNavigate();
 
   const onSubmit: SubmitHandler<IForm> = () => {
-    nav("/test/3");
+    nav(Page.Step3);
   };
 
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ export const Step2 = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.mainForm}>
-      {!apiState ? <Alert color="danger">{ERROR_HTTP_FAIL}</Alert> : null}
+      {!apiState ? <Alert color="danger">{Error.HttpFail}</Alert> : null}
 
       <FormGroup>
         <Input
@@ -80,7 +80,7 @@ export const Step2 = () => {
       </FormGroup>
 
       <div className="d-flex justify-content-between">
-        <Button type="button" onClick={() => nav("/test/")}>
+        <Button type="button" onClick={() => nav(Page.Step1)}>
           Назад
         </Button>
         <Button type="submit">Далее</Button>

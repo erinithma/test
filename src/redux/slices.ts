@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Request } from "../common/request";
-import { URL_JOBS } from "../common/const";
+import { Url } from "../common/const";
 
 export interface State {
   value: Record<string, string>;
@@ -20,7 +20,7 @@ const initialState: State = {
 
 export const fetchPlaces = createAsyncThunk("api/fetchPlaces", async () => {
   try {
-    const places = await Request.get(URL_JOBS);
+    const places = await Request.get(Url.Jobs);
     return {
       places,
       success: true,

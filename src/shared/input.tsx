@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import { Controller, FieldError } from "react-hook-form";
 import { FormFeedback, Label, Input as ReactstrapInput } from "reactstrap";
-import { ERROR_INVALID_FORMAT, ERROR_REQUIRED } from "../common/const";
+import { Error } from "../common/const";
 import { InputType } from "reactstrap/types/lib/Input";
 
 interface InputProps {
@@ -36,12 +36,12 @@ export const Input: FC<InputProps> = ({
       control={control}
       rules={{
         required: required
-          ? { value: true, message: ERROR_REQUIRED }
+          ? { value: true, message: Error.Required }
           : undefined,
         pattern: pattern
           ? {
               value: pattern,
-              message: ERROR_INVALID_FORMAT,
+              message: Error.InvalidFormat,
             }
           : undefined,
       }}

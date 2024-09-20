@@ -4,18 +4,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Step1, Step2, Step3 } from "./pages";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import { Page } from "./common/const";
 
 const router = createBrowserRouter([
   {
-    path: "/test/",
+    path: Page.Step1,
     element: <Step1 />,
   },
   {
-    path: "/test/2",
+    path: Page.Step2,
     element: <Step2 />,
   },
   {
-    path: "/test/3",
+    path: Page.Step3,
     element: <Step3 />,
   },
   {

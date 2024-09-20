@@ -1,4 +1,4 @@
-import { ERROR_HTTP_FAIL } from "./const";
+import { Error as HttpError } from "./const";
 
 export class Request {
   static async run(
@@ -9,12 +9,12 @@ export class Request {
     try {
       const req = await fetch(url, { method, body: JSON.stringify(params) });
       if (req.status !== 200) {
-        throw new Error(ERROR_HTTP_FAIL);
+        throw new Error(HttpError.HttpFail);
       }
       const res = await req.json();
       return res;
     } catch (e) {
-      throw new Error(ERROR_HTTP_FAIL);
+      throw new Error(HttpError.HttpFail);
     }
   }
 

@@ -8,7 +8,7 @@ import {
   ModalHeader,
 } from "reactstrap";
 import style from "../App.module.scss";
-import { URL_SEND } from "../common/const";
+import { Url } from "../common/const";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "../redux/slices";
@@ -31,7 +31,7 @@ export const Step3 = () => {
   });
 
   const onSubmit: SubmitHandler<IForm> = () => {
-    Request.post(URL_SEND, {
+    Request.post(Url.Send, {
       title: name + " " + surname,
     }).then(() => toggle());
   };

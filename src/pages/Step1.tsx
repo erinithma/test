@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { set } from "../redux/slices";
 import { getState } from "../redux/selectors";
 import { Input } from "../shared/input";
+import { Page } from "../common/const";
 
 interface IForm extends Record<string, string> {
   phone: string;
@@ -29,7 +30,7 @@ export const Step1 = () => {
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<IForm> = () => {
-    nav("/test/2");
+    nav(Page.Step2);
   };
 
   const handleBlur = () => {
