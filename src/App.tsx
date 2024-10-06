@@ -5,6 +5,7 @@ import { Step1, Step2, Step3 } from "./pages";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { Page } from "./common/const";
+import { i18n } from "./locale/i18n";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <div>Страница не найдена</div>,
+    element: <div>{i18n.t("error.pageNotFound")}</div>,
   },
 ]);
 

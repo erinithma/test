@@ -7,6 +7,7 @@ import { set } from "../redux/slices";
 import { getState } from "../redux/selectors";
 import { Input } from "../shared/input";
 import { Page } from "../common/const";
+import { i18n } from "../locale/i18n";
 
 interface IForm extends Record<string, string> {
   phone: string;
@@ -48,7 +49,7 @@ export const Step1 = () => {
           pattern={/\d{3}\s\d{3}\s\d{3}/}
           type="tel"
           placeholder="0999 999 999"
-          title="Телефон"
+          title={i18n.t("field.phone")}
           error={errors.phone}
           name="phone"
           handleBlur={handleBlur}
@@ -59,7 +60,7 @@ export const Step1 = () => {
         <Input
           control={control}
           required
-          title="Имя"
+          title={i18n.t("field.name")}
           error={errors.name}
           name="name"
           handleBlur={handleBlur}
@@ -70,7 +71,7 @@ export const Step1 = () => {
         <Input
           control={control}
           required
-          title="Фамилия"
+          title={i18n.t("field.surname")}
           error={errors.surname}
           name="surname"
           handleBlur={handleBlur}
@@ -82,16 +83,16 @@ export const Step1 = () => {
           control={control}
           type="select"
           error={errors.gender}
-          title="Пол"
+          title={i18n.t("field.gender")}
           name="gender"
           handleBlur={handleBlur}
         >
-          <option value="m">Мужской</option>
-          <option value="f">Женский</option>
+          <option value="m">{i18n.t("gender.m")}</option>
+          <option value="f">{i18n.t("gender.f")}</option>
         </Input>
       </FormGroup>
 
-      <Button type="submit">Далее</Button>
+      <Button type="submit">{i18n.t("button.next")}</Button>
     </form>
   );
 };

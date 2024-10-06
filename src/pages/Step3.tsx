@@ -15,6 +15,7 @@ import { set } from "../redux/slices";
 import { Request } from "../common/request";
 import { getState } from "../redux/selectors";
 import { Slider } from "../shared/slider";
+import { i18n } from "../locale/i18n";
 
 interface IForm extends Record<string, string> {
   count: string;
@@ -30,6 +31,8 @@ export const Step3 = () => {
     }, [initial]),
   });
 
+  const { name, surname, count, period } = initial;
+
   const onSubmit: SubmitHandler<IForm> = () => {
     Request.post(Url.Send, {
       title: name + " " + surname,
@@ -42,8 +45,6 @@ export const Step3 = () => {
     dispatch(set(getValues()));
   };
 
-  const { name, surname, count, period } = initial;
-
   const [modal, setModal] = useState(false);
   const toggle = () => setModal((m) => !m);
 
@@ -52,7 +53,7 @@ export const Step3 = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={style.mainForm}>
         <FormGroup>
           <Slider
-            title="Сумма займа"
+            title={i18n.t("field.count")}
             control={control}
             max={1000}
             min={200}
@@ -64,7 +65,7 @@ export const Step3 = () => {
 
         <FormGroup>
           <Slider
-            title="Период займа"
+            title={i18n.t("field.period")}
             control={control}
             max={30}
             min={10}
@@ -75,18 +76,19 @@ export const Step3 = () => {
         </FormGroup>
 
         <div className="d-flex justify-content-between">
-          <Button type="submit">Подать заявку</Button>
+          <Button type="submit">{i18n.t("button.application")}</Button>
         </div>
       </form>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Успех!</ModalHeader>
+        <ModalHeader toggle={toggle}>
+          {i18n.t("application.success")}
+        </ModalHeader>
         <ModalBody>
-          Поздравляем, {surname} {name}, вам одобрена сумма ${count} на {period}{" "}
-          дней
+          {i18n.t("application.text", { surname, name, cnt: count, period })}
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>
-            Ok
+            {i18n.t("button.ok")}
           </Button>
         </ModalFooter>
       </Modal>

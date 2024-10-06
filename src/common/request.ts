@@ -1,4 +1,4 @@
-import { Error as HttpError } from "./const";
+import { i18n } from "../locale/i18n";
 
 export class Request {
   static async run(
@@ -6,15 +6,17 @@ export class Request {
     method: "GET" | "POST",
     params?: Record<string, string>
   ) {
+    const errorText = i18n.t("error.httpFail");
+
     try {
       const req = await fetch(url, { method, body: JSON.stringify(params) });
-      if (req.status !== 200) {
-        throw new Error(HttpError.HttpFail);
+      if (req.status > 400) {
+        throw new Error(errorText);
       }
       const res = await req.json();
       return res;
     } catch (e) {
-      throw new Error(HttpError.HttpFail);
+      throw new Error(errorText);
     }
   }
 

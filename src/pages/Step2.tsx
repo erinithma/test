@@ -8,7 +8,8 @@ import { fetchPlaces, set } from "../redux/slices";
 import { getApiState, getPlaces, getState } from "../redux/selectors";
 import { store } from "../redux/store";
 import { Input } from "../shared/input";
-import { Error, Page } from "../common/const";
+import { Page } from "../common/const";
+import { i18n } from "../locale/i18n";
 
 interface IForm extends Record<string, string> {
   job: string;
@@ -50,12 +51,14 @@ export const Step2 = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.mainForm}>
-      {!apiState ? <Alert color="danger">{Error.HttpFail}</Alert> : null}
+      {!apiState ? (
+        <Alert color="danger">{i18n.t("error.httpFail")}</Alert>
+      ) : null}
 
       <FormGroup>
         <Input
           control={control}
-          title="Место работы"
+          title={i18n.t("field.job")}
           name="job"
           type="select"
           error={errors.job}
@@ -71,7 +74,7 @@ export const Step2 = () => {
 
       <FormGroup>
         <Input
-          title="Адрес проживания"
+          title={i18n.t("field.address")}
           control={control}
           required
           handleBlur={handleBlur}
@@ -82,9 +85,9 @@ export const Step2 = () => {
 
       <div className="d-flex justify-content-between">
         <Button type="button" onClick={() => nav(Page.Step1)}>
-          Назад
+          {i18n.t("button.back")}
         </Button>
-        <Button type="submit">Далее</Button>
+        <Button type="submit">{i18n.t("button.next")}</Button>
       </div>
     </form>
   );

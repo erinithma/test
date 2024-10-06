@@ -1,8 +1,8 @@
 import { FC, ReactNode } from "react";
 import { Controller, FieldError } from "react-hook-form";
 import { FormFeedback, Label, Input as ReactstrapInput } from "reactstrap";
-import { Error } from "../common/const";
 import { InputType } from "reactstrap/types/lib/Input";
+import { i18n } from "../locale/i18n";
 
 interface InputProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,12 +36,12 @@ export const Input: FC<InputProps> = ({
       control={control}
       rules={{
         required: required
-          ? { value: true, message: Error.Required }
+          ? { value: true, message: i18n.t("error.required") }
           : undefined,
         pattern: pattern
           ? {
               value: pattern,
-              message: Error.InvalidFormat,
+              message: i18n.t("error.invalidFormat"),
             }
           : undefined,
       }}
